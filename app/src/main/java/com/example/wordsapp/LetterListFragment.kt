@@ -24,7 +24,7 @@ class LetterListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLetterListBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -60,9 +60,9 @@ class LetterListFragment : Fragment() {
 
         menuItem.icon =
             if (isLinearLayoutManager)
-                ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_grid_layout)
             else
-                ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_linear_layout)
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_linear_layout)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

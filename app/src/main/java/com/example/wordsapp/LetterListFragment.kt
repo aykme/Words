@@ -32,6 +32,7 @@ class LetterListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
+        recyclerView.adapter = LetterAdapter()
         chooseLayout()
     }
 
@@ -46,12 +47,24 @@ class LetterListFragment : Fragment() {
         setIcon(layoutButton)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_switch_layout -> {
+                isLinearLayoutManager = !isLinearLayoutManager
+                chooseLayout()
+                setIcon(item)
+
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun chooseLayout() {
         when (isLinearLayoutManager) {
-            true -> recyclerView.layoutManager = LinearLayoutManager(context)
-            false -> recyclerView.layoutManager = GridLayoutManager(context, 4)
+            true -> recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            false -> recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
         }
-        recyclerView.adapter = LetterAdapter()
     }
 
     private fun setIcon(menuItem: MenuItem?) {
@@ -65,16 +78,4 @@ class LetterListFragment : Fragment() {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_linear_layout)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_switch_layout -> {
-                isLinearLayoutManager = !isLinearLayoutManager
-                chooseLayout()
-                setIcon(item)
-
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

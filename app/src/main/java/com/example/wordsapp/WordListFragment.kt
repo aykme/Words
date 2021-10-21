@@ -50,7 +50,6 @@ class WordListFragment : Fragment() {
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         )
 
-        activity?.title = getString(R.string.detail_prefix) + " " + letterId
     }
 
     override fun onDestroyView() {
